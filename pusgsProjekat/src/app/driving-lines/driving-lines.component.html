@@ -1,0 +1,1129 @@
+<div id=left-wrapper> 
+        <div id=button-linije>
+            <div>
+            <!--uvodni-text-->
+             
+              <div class="col-md-12 text-center">
+                  <h3 class="active">URBAN, SUBURBAN AND INTERCITY BUSLINE GRID SYSTEM</h3>
+              </div> 
+              <br>
+              <p>
+                Bus line grid system are based on Google Maps and consider urban, suburban and intercity lines for JGSP Novi Sad.You can choose one or more lines by pressing number of line on fields bellow.
+              </p>
+                                  <div>
+                                  <!--legenda gornja-->
+                                    <span class=legenda>Legend: 
+                                        <span class=grad-text><i class="fa fa-square"></i> <a href="#" id="triggergrad"> URBAN BUS LINES </a></span>
+                                        <span class=prigrad-text><i class="fa fa-square"></i> <a href="#" id="triggerprigrad"> SUBURBAN BUS LINES </a></span>
+                                        <span class=medjumesni-text><i class="fa fa-square"></i> <a href="#" id="triggermedjumesni"> INTERCITY BUS LINES</a></span>
+                                        
+                                    </span>
+                                                          <!--mapa-->
+                                  <!-- <div id="map_canvas" style="width:100%; height:600px"> -->
+                                    <!--Google map-->
+                                    <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                                        <iframe src="https://maps.google.com/maps?q=novi-sad&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+                                          style="border:0" allowfullscreen></iframe>
+                                      </div>
+                                      <!--Google Maps-->
+                                  <!-- </div> -->
+                                  
+                                  <!--legenda ispod-->
+                                  <div class="stajalista-legenda">
+                                    <img src="assets/busstationa.png" height=15> Bus stop direction A,  
+                                    <img src="assets/busstationb.png" height=15> Bus stop direction B, 
+                                    <br>
+                                    <label>
+                                      By pressing on any icon of bus stop You can see the picture of bus stop and related zone.
+                                      </label>
+                                    </div>
+                                    
+                                    <!-- dugmici za prikaz linija -->
+                                    <!-- <ul>
+                                                        <li><a id="1" class="button-linija tooltip grad ablin1" title="KLISA - CENTAR - LIMAN I"  >   1A</a></li>
+                                                        <li><a id="2" class="button-linija tooltip grad ablin2" title="LIMAN I - CENTAR - KLISA"  >   1B</a></li>
+                                                        <li><a id="232" class="button-linija tooltip grad ablin232" title="ZATVOR - KLISA - CENTAR - LIMAN I"  >   1ZA</a></li>
+                                                        <li><a id="233" class="button-linija tooltip grad ablin233" title="LIMAN I - CENTAR - KLISA - ZATVOR"  >   1ZB</a></li>
+                                                        <li><a id="3" class="button-linija tooltip grad ablin3" title="CENTAR - NOVO NASELJE"  >   2A</a></li>
+                                                        <li><a id="4" class="button-linija tooltip grad ablin4" title="NOVO NASELJE - CENTAR"  >   2B</a></li>
+                                                        <li><a id="5" class="button-linija tooltip grad ablin5" title="PETROVARADIN - CENTAR - DETELINARA"  >   3A</a></li>
+                                                        <li><a id="6" class="button-linija tooltip grad ablin6" title="DETELINARA - CENTAR - PETROVARADIN"  >   3B</a></li>
+                                                        <li><a id="241" class="button-linija tooltip grad ablin241" title="ŽELEZNIČKA STANICA - POBEDA"  >   3AA</a></li>
+                                                        <li><a id="242" class="button-linija tooltip grad ablin242" title="POBEDA - ŽELEZNIČKA STANICA"  >   3AB</a></li>
+                                                        <li><a id="7" class="button-linija tooltip grad ablin7" title="LIMAN IV - CENTAR - ŽELEZNIČKA STANICA"  >   4A</a></li>
+                                                        <li><a id="8" class="button-linija tooltip grad ablin8" title="ŽELEZNIČKA STANICA - CENTAR - LIMAN IV"  >   4B</a></li>
+                                                        <li><a id="9" class="button-linija tooltip grad ablin9" title="TEMERINSKI PUT - CENTAR - AVIJATIČARSKO NASELJE"  >   5A</a></li>
+                                                        <li><a id="10" class="button-linija tooltip grad ablin10" title="AVIJATIČARSKO NASELJE - CENTAR - TEMERINSKI PUT"  >   5B</a></li>
+                                                        <li><a id="69" class="button-linija tooltip grad ablin69" title="ZELEZNICKA STANICA - NAJLON - TEMERINSKI PUT"  >   5NA</a></li>
+                                                        <li><a id="70" class="button-linija tooltip grad ablin70" title="TEMERINSKI PUT - NAJLON - ZELEZNICKA STANICA"  >   5NB</a></li>
+                                                        <li><a id="11" class="button-linija tooltip grad ablin11" title="PODBARA - ADICE"  >   6A</a></li>
+                                                        <li><a id="12" class="button-linija tooltip grad ablin12" title="ADICE - PODBARA"  >   6B</a></li>
+                                                        <li><a id="234" class="button-linija tooltip grad ablin234" title="ADICE - VETERNIK (O.&Scaron;. MARIJA TRANDAFIL)"  >   6AA</a></li>
+                                                        <li><a id="235" class="button-linija tooltip grad ablin235" title="VETERNIK (O.&Scaron;. MARIJA TRANDAFIL) - ADICE"  >   6AB</a></li>
+                                                        <li><a id="13" class="button-linija tooltip grad ablin13" title="NOVO NASELJE - ŽELEZNIČKA STANICA - LIMAN IV - NOVO NASELJE"  >   7A</a></li>
+                                                        <li><a id="14" class="button-linija tooltip grad ablin14" title="NOVO NASELJE - LIMAN IV - ŽELEZNIČKA STANICA - NOVO NASELJE"  >   7B</a></li>
+                                                        <li><a id="15" class="button-linija tooltip grad ablin15" title="NOVO NASELJE - CENTAR - LIMAN I"  >   8A</a></li>
+                                                        <li><a id="16" class="button-linija tooltip grad ablin16" title="LIMAN I - CENTAR - NOVO NASELJE"  >   8B</a></li>
+                                                        <li><a id="17" class="button-linija tooltip grad ablin17" title="NOVO NASELJE - LIMAN - PETROVARADIN"  >   9A</a></li>
+                                                        <li><a id="18" class="button-linija tooltip grad ablin18" title="PETROVARADIN - LIMAN - NOVO NASELJE"  >   9B</a></li>
+                                                        <li><a id="19" class="button-linija tooltip grad ablin19" title="CENTAR - INDUSTRIJSKA ZONA JUG"  >  10A</a></li>
+                                                        <li><a id="20" class="button-linija tooltip grad ablin20" title="INDUSTRIJSKA ZONA JUG - CENTAR"  >  10B</a></li>
+                                                        <li><a id="21" class="button-linija tooltip grad ablin21" title="ŽELEZNIČKA STANICA - BOLNICA - LIMAN - ŽELEZNIČKA STANICA"  >  11A</a></li>
+                                                        <li><a id="22" class="button-linija tooltip grad ablin22" title="ŽELEZNIČKA STANICA - LIMAN - BOLNICA - ŽELEZNIČKA STANICA"  >  11B</a></li>
+                                                        <li><a id="23" class="button-linija tooltip grad ablin23" title="CENTAR - TELEP"  >  12A</a></li>
+                                                        <li><a id="24" class="button-linija tooltip grad ablin24" title="TELEP - CENTAR"  >  12B</a></li>
+                                                        <li><a id="239" class="button-linija tooltip grad ablin239" title="DETELINARA - GRBAVICA - UNIVERZITET"  >  13A</a></li>
+                                                        <li><a id="240" class="button-linija tooltip grad ablin240" title="UNIVERZITET - GRBAVICA - DETELINARA"  >  13B</a></li>
+                                                        <li><a id="25" class="button-linija tooltip grad ablin25" title="CENTAR - SAJLOVO"  >  14A</a></li>
+                                                        <li><a id="26" class="button-linija tooltip grad ablin26" title="SAJLOVO - CENTAR"  >  14B</a></li>
+                                                        <li><a id="27" class="button-linija tooltip grad ablin27" title="CENTAR - INDUSTRIJSKA ZONA SEVER"  >  15A</a></li>
+                                                        <li><a id="28" class="button-linija tooltip grad ablin28" title="INDUSTRIJSKA ZONA SEVER - CENTAR"  >  15B</a></li>
+                                                        <li><a id="29" class="button-linija tooltip grad ablin29" title="ŽELEZNIČKA STANICA - PRISTANI&Scaron;NA ZONA"  >  16A</a></li>
+                                                        <li><a id="30" class="button-linija tooltip grad ablin30" title="PRISTANI&Scaron;NA ZONA - ŽELEZNIČKA STANICA"  >  16B</a></li>
+                                                        <li><a id="31" class="button-linija tooltip grad ablin31" title="BIG CENTAR - CENTAR- ŽELEZNIČKA STANICA - BIG CENTAR"  >  17A</a></li>
+                                                        <li><a id="33" class="button-linija tooltip grad ablin33" title="NOVI SAD (Ž.S.) - &Scaron;ANGAJ"  >  21A</a></li>
+                                                        <li><a id="34" class="button-linija tooltip grad ablin34" title="&Scaron;ANGAJ - NOVI SAD (Ž.S.)"  >  21B</a></li>
+                                                        <li><a id="81" class="button-linija tooltip grad ablin81" title="NOVI SAD (Ž.S.) - SREMSKA  KAMENICA (VOJINOVO)"  >  68A</a></li>
+                                                        <li><a id="82" class="button-linija tooltip grad ablin82" title="SREMSKA KAMENICA (VOJINOVO) - NOVI SAD (Ž.S.) "  >  68B</a></li>
+                                                        <li><a id="83" class="button-linija tooltip grad ablin83" title="NOVI SAD (Ž.S.) - SREMSKA KAMENICA (ČARDAK)"  >  69A</a></li>
+                                                        <li><a id="84" class="button-linija tooltip grad ablin84" title="SREMSKA KAMENICA (ČARDAK) - NOVI SAD (Ž.S.) "  >  69B</a></li>
+                                                        <li><a id="85" class="button-linija tooltip grad ablin85" title="NOVI SAD (Ž.S.) - SREMSKA KAMENICA (BOCKE)"  >  71A</a></li>
+                                                        <li><a id="86" class="button-linija tooltip grad ablin86" title="SREMSKA KAMENICA (BOCKE) - NOVI SAD (Ž.S.)"  >  71B</a></li>
+                                                        <li><a id="243" class="button-linija tooltip grad ablin243" title="NOVO NASELJE &ndash; DETELINARA &ndash; CENTAR &ndash; LIMAN &ndash; NOVO NASELJE"  >18A</a></li>
+                                                        <li><a id="244" class="button-linija tooltip grad ablin244" title="NOVO NASELJE &ndash; LIMAN &ndash; CENTAR - DETELINARA &ndash; NOVO NASELJE"  >18B</a></li>
+                                                        <li><a id="255" class="button-linija tooltip grad ablin255" title="ŽELEZNIČKA STANICA - LESNINA"  >20A</a></li>
+                                                        <li><a id="256" class="button-linija tooltip grad ablin256" title="ŽELEZNIČKA STANICA - LESNINA"  >20B</a></li>
+                                                     
+                                                        <li><a id="35" class="button-linija tooltip prigrad ablin35" title="NOVI SAD (Ž.S.) - KAĆ"  >  22A</a></li>
+                                                         <li><a id="36" class="button-linija tooltip prigrad ablin36" title="KAĆ - NOVI SAD (Ž.S.)"  >  22B</a></li>
+                                                         <li><a id="37" class="button-linija tooltip prigrad ablin37" title="NOVI SAD (Ž.S.) - BUDISAVA"  >  23A</a></li>
+                                                         <li><a id="38" class="button-linija tooltip prigrad ablin38" title="BUDISAVA - NOVI SAD (Ž.S.)"  >  23B</a></li>
+                                                         <li><a id="39" class="button-linija tooltip prigrad ablin39" title="NOVI SAD (Ž.S.) - KOVILJ"  >  24A</a></li>
+                                                         <li><a id="40" class="button-linija tooltip prigrad ablin40" title="KOVILJ - NOVI SAD (Ž.S.)"  >  24B</a></li>
+                                                         <li><a id="42" class="button-linija tooltip prigrad ablin42" title="NOVI SAD (Ž.S.) - PEJIĆEVI SALA&Scaron;I"  >  30A</a></li>
+                                                         <li><a id="43" class="button-linija tooltip prigrad ablin43" title="PEJIĆEVI SALA&Scaron;I - NOVI SAD (Ž.S.)"  >  30B</a></li>
+                                                         <li><a id="50" class="button-linija tooltip prigrad ablin50" title="NOVI SAD (Ž.S.)  - ČENEJ"  >  35A</a></li>
+                                                         <li><a id="51" class="button-linija tooltip prigrad ablin51" title="ČENEJ - NOVI SAD (Ž.S.) "  >  35B</a></li>
+                                                         <li><a id="236" class="button-linija tooltip prigrad ablin236" title="NOVI SAD (Ž.S.) - ČENEJ - LIS"  >  35ČLA</a></li>
+                                                         <li><a id="238" class="button-linija tooltip prigrad ablin238" title="ČENEJ - LIS - NOVI SAD (Ž.S.)"  >  35ČLB</a></li>
+                                                         <li><a id="52" class="button-linija tooltip prigrad ablin52" title="NOVI SAD (ZS) - RUMENKA"  >  41A</a></li>
+                                                         <li><a id="53" class="button-linija tooltip prigrad ablin53" title="RUMENKA - NOVI SAD (ZS)"  >  41B</a></li>
+                                                         <li><a id="54" class="button-linija tooltip prigrad ablin54" title="NOVI SAD (ZS) - KISAC"  >  42A</a></li>
+                                                         <li><a id="55" class="button-linija tooltip prigrad ablin55" title="KISAC - NOVI SAD (ZS)"  >  42B</a></li>
+                                                         <li><a id="56" class="button-linija tooltip prigrad ablin56" title="NOVI SAD (ZS) - STEPANOVICEVO"  >  43A</a></li>
+                                                         <li><a id="57" class="button-linija tooltip prigrad ablin57" title="STEPANOVICEVO - NOVI SAD (ZS)"  >  43B</a></li>
+                                                         <li><a id="58" class="button-linija tooltip prigrad ablin58" title="NOVI SAD (Ž.S.) - VETERNIK"  >  52A</a></li>
+                                                         <li><a id="59" class="button-linija tooltip prigrad ablin59" title="VETERNIK - NOVI SAD (Ž.S.)"  >  52B</a></li>
+                                                         <li><a id="60" class="button-linija tooltip prigrad ablin60" title="NOVI SAD (Ž.S.) - FUTOG STARI"  >  53A</a></li>
+                                                         <li><a id="61" class="button-linija tooltip prigrad ablin61" title="FUTOG  STARI - NOVI SAD (Ž.S.)"  >  53B</a></li>
+                                                         <li><a id="62" class="button-linija tooltip prigrad ablin62" title="NOVI SAD (Ž.S.) - FUTOG (GRMEČKA)"  >  54A</a></li>
+                                                         <li><a id="63" class="button-linija tooltip prigrad ablin63" title="FUTOG (GRMEČKA) - NOVI SAD (Ž.S.)"  >  54B</a></li>
+                                                         <li><a id="65" class="button-linija tooltip prigrad ablin65" title="NOVI SAD (Ž.S.) - FUTOG (BRAĆE BO&Scaron;NJAK)"  >  55A</a></li>
+                                                         <li><a id="66" class="button-linija tooltip prigrad ablin66" title="FUTOG (BRAĆE BO&Scaron;NJAK) - NOVI SAD (Ž.S.)"  >  55B</a></li>
+                                                         <li><a id="67" class="button-linija tooltip prigrad ablin67" title="NOVI SAD (Ž.S.) - BEGEČ"  >  56A</a></li>
+                                                         <li><a id="68" class="button-linija tooltip prigrad ablin68" title="BEGEČ - NOVI SAD (Ž.S.)"  >  56B</a></li>
+                                                         <li><a id="79" class="button-linija tooltip prigrad ablin79" title="NOVI SAD (Ž.S.) - BUKOVAC"  >  64A</a></li>
+                                                         <li><a id="80" class="button-linija tooltip prigrad ablin80" title="BUKOVAC - NOVI SAD (Ž.S.) "  >  64B</a></li>
+                                                         <li><a id="87" class="button-linija tooltip prigrad ablin87" title="NOVI SAD (Ž.S.) - SREMSKA KAMENICA (PARAGOVO)"  >  72A</a></li>
+                                                         <li><a id="88" class="button-linija tooltip prigrad ablin88" title="SREMSKA KAMENICA (PARAGOVO) - NOVI SAD (Ž.S.)"  >  72B</a></li>
+                                                         <li><a id="89" class="button-linija tooltip prigrad ablin89" title="NOVI SAD (Ž.S.) - SREMSKA KAMENICA (MO&Scaron;INA VILA)"  >  73A</a></li>
+                                                         <li><a id="90" class="button-linija tooltip prigrad ablin90" title="SREMSKA KAMENICA (MO&Scaron;INA VILA) - NOVI SAD (Ž.S.)"  >  73B</a></li>
+                                                         <li><a id="92" class="button-linija tooltip prigrad ablin92" title="NOVI SAD (Ž.S.) - SREMSKA KAMENICA (POPOVICA)"  >  74A</a></li>
+                                                         <li><a id="93" class="button-linija tooltip prigrad ablin93" title="SREMSKA KAMENICA (POPOVICA) - NOVI SAD (Ž.S.)"  >  74B</a></li>
+                                                         <li><a id="95" class="button-linija tooltip prigrad ablin95" title="NOVI SAD (Ž.S.) - STARI LEDINCI"  >  76A</a></li>
+                                                         <li><a id="96" class="button-linija tooltip prigrad ablin96" title="STARI LEDINCI - NOVI SAD (Ž.S.) "  >  76B</a></li>
+                                                         <li><a id="251" class="button-linija tooltip prigrad ablin251" title="ŽELEZNIČKA STANICA - VETERNIK - SAJLOVO - ŽELEZNIČKA STANICA"  >51A</a></li>
+                                                         <li><a id="252" class="button-linija tooltip prigrad ablin252" title="ŽELEZNIČKA STANICA - SAJLOVO - VETERNIK - ŽELEZNIČKA STANICA"  >51B</a></li>
+                                                         
+                                                        <li><a id="44" class="button-linija tooltip medjumesni ablin44" title="NOVI SAD (A.S.) - BAČKI JARAK" >  31A</a></li>
+                                                        <li><a id="45" class="button-linija tooltip medjumesni ablin45" title="BAČKI JARAK - NOVI SAD (A.S.)" >  31B</a></li>
+                                                        <li><a id="46" class="button-linija tooltip medjumesni ablin46" title="NOVI SAD (A.S.) - TEMERIN" >  32A</a></li>
+                                                        <li><a id="47" class="button-linija tooltip medjumesni ablin47" title="TEMERIN - NOVI SAD (A.S.)" >  32B</a></li>
+                                                        <li><a id="48" class="button-linija tooltip medjumesni ablin48" title="NOVI SAD (A.S.) - GOSPOĐINCI" >  33A</a></li>
+                                                        <li><a id="49" class="button-linija tooltip medjumesni ablin49" title="GOSPOĐINCI - NOVI SAD (A.S.)" >  33B</a></li>
+                                                        <li><a id="71" class="button-linija tooltip medjumesni ablin71" title="NOVI SAD (A.S.) - SREMSKI KARLOVCI (BELILO II)" >  60A</a></li>
+                                                        <li><a id="72" class="button-linija tooltip medjumesni ablin72" title="SREMSKI KARLOVCI (BELILO II) - NOVI SAD (A.S.)" >  60B</a></li>
+                                                        <li><a id="74" class="button-linija tooltip medjumesni ablin74" title="NOVI SAD (A.S.) - SREMSKI KARLOVCI (VINOGRADSKA)" >  61A</a></li>
+                                                        <li><a id="75" class="button-linija tooltip medjumesni ablin75" title="SREMSKI KARLOVCI (VINOGRADSKA) - NOVI SAD (A.S.)" >  61B</a></li>
+                                                        <li><a id="77" class="button-linija tooltip medjumesni ablin77" title="NOVI SAD (A.S.) - SREMSKI KARLOVCI (DUDARA)" >  62A</a></li>
+                                                        <li><a id="78" class="button-linija tooltip medjumesni ablin78" title="SREMSKI KARLOVCI (DUDARA) - NOVI SAD (A.S.)" >  62B</a></li>
+                                                        <li><a id="98" class="button-linija tooltip medjumesni ablin98" title="NOVI SAD (A.S.) - STARI RAKOVAC" >  77A</a></li>
+                                                        <li><a id="99" class="button-linija tooltip medjumesni ablin99" title="STARI RAKOVAC - NOVI SAD (A.S.)" >  77B</a></li>
+                                                        <li><a id="100" class="button-linija tooltip medjumesni ablin100" title="NOVI SAD (A.S.) - BEOČIN SELO" >  78A</a></li>
+                                                        <li><a id="101" class="button-linija tooltip medjumesni ablin101" title="BEOČIN SELO - NOVI SAD (A.S.)" >  78B</a></li>
+                                                        <li><a id="102" class="button-linija tooltip medjumesni ablin102" title="NOVI SAD (A.S.) - ČEREVIĆ" >  79A</a></li>
+                                                        <li><a id="103" class="button-linija tooltip medjumesni ablin103" title="ČEREVIĆ - NOVI SAD (A.S.)" >  79B</a></li>
+                                                        <li><a id="106" class="button-linija tooltip medjumesni ablin106" title="NOVI SAD (A.S.) - BEOČIN (B.A.S.)" >  80A</a></li>
+                                                        <li><a id="107" class="button-linija tooltip medjumesni ablin107" title="BEOČIN (B.A.S.) - NOVI SAD (A.S.)" >80B</a></li>
+                                                        <li><a id="109" class="button-linija tooltip medjumesni ablin109" title="NOVI SAD (A.S.) - BANO&Scaron;TOR" >81A</a></li>
+                                                        <li><a id="110" class="button-linija tooltip medjumesni ablin110" title="BANO&Scaron;TOR - NOVI SAD (A.S.)" >81B</a></li>
+                                                        <li><a id="111" class="button-linija tooltip medjumesni ablin111" title="NOVI SAD (A.S.) - LUG" >84A</a></li>
+                                                        <li><a id="112" class="button-linija tooltip medjumesni ablin112" title="LUG - NOVI SAD (A.S.)" >84B</a></li>
+                                                    </ul> -->
+                                </div>             
+                        </div> 
+        <br>
+		<br>
+</div> 
+                        <div id="gradp" class="pop-up">
+                            <h3 class="text-center text-info">BUSLINES</h3>
+                        <br>
+                                      <table class=info-table>
+                                        <tr><th colspan="2">GRADSKE LINIJE</th></tr>
+                                                          <tr>
+                                        <td width=50px>
+                                           1A
+                                        </td>
+                                        <td width=500px>
+                                        KLISA - CENTAR - LIMAN I
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           1B
+                                        </td>
+                                        <td width=500px>
+                                        LIMAN I - CENTAR - KLISA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           1ZA
+                                        </td>
+                                        <td width=500px>
+                                        ZATVOR - KLISA - CENTAR - LIMAN I
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           1ZB
+                                        </td>
+                                        <td width=500px>
+                                        LIMAN I - CENTAR - KLISA - ZATVOR
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           2A
+                                        </td>
+                                        <td width=500px>
+                                        CENTAR - NOVO NASELJE
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           2B
+                                        </td>
+                                        <td width=500px>
+                                        NOVO NASELJE - CENTAR
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           3A
+                                        </td>
+                                        <td width=500px>
+                                        PETROVARADIN - CENTAR - DETELINARA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           3B
+                                        </td>
+                                        <td width=500px>
+                                        DETELINARA - CENTAR - PETROVARADIN
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           3AA
+                                        </td>
+                                        <td width=500px>
+                                        ŽELEZNIČKA STANICA - POBEDA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           3AB
+                                        </td>
+                                        <td width=500px>
+                                        POBEDA - ŽELEZNIČKA STANICA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           4A
+                                        </td>
+                                        <td width=500px>
+                                        LIMAN IV - CENTAR - ŽELEZNIČKA STANICA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           4B
+                                        </td>
+                                        <td width=500px>
+                                        ŽELEZNIČKA STANICA - CENTAR - LIMAN IV
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           5A
+                                        </td>
+                                        <td width=500px>
+                                        TEMERINSKI PUT - CENTAR - AVIJATIČARSKO NASELJE
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           5B
+                                        </td>
+                                        <td width=500px>
+                                        AVIJATIČARSKO NASELJE - CENTAR - TEMERINSKI PUT
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           5NA
+                                        </td>
+                                        <td width=500px>
+                                        ZELEZNICKA STANICA - NAJLON - TEMERINSKI PUT
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           5NB
+                                        </td>
+                                        <td width=500px>
+                                        TEMERINSKI PUT - NAJLON - ZELEZNICKA STANICA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           6A
+                                        </td>
+                                        <td width=500px>
+                                        PODBARA - ADICE
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           6B
+                                        </td>
+                                        <td width=500px>
+                                        ADICE - PODBARA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           6AA
+                                        </td>
+                                        <td width=500px>
+                                        ADICE - VETERNIK (O.&Scaron;. MARIJA TRANDAFIL)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           6AB
+                                        </td>
+                                        <td width=500px>
+                                        VETERNIK (O.&Scaron;. MARIJA TRANDAFIL) - ADICE
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           7A
+                                        </td>
+                                        <td width=500px>
+                                        NOVO NASELJE - ŽELEZNIČKA STANICA - LIMAN IV - NOVO NASELJE
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           7B
+                                        </td>
+                                        <td width=500px>
+                                        NOVO NASELJE - LIMAN IV - ŽELEZNIČKA STANICA - NOVO NASELJE
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           8A
+                                        </td>
+                                        <td width=500px>
+                                        NOVO NASELJE - CENTAR - LIMAN I
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           8B
+                                        </td>
+                                        <td width=500px>
+                                        LIMAN I - CENTAR - NOVO NASELJE
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           9A
+                                        </td>
+                                        <td width=500px>
+                                        NOVO NASELJE - LIMAN - PETROVARADIN
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                           9B
+                                        </td>
+                                        <td width=500px>
+                                        PETROVARADIN - LIMAN - NOVO NASELJE
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          10A
+                                        </td>
+                                        <td width=500px>
+                                        CENTAR - INDUSTRIJSKA ZONA JUG
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          10B
+                                        </td>
+                                        <td width=500px>
+                                        INDUSTRIJSKA ZONA JUG - CENTAR
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          11A
+                                        </td>
+                                        <td width=500px>
+                                        ŽELEZNIČKA STANICA - BOLNICA - LIMAN - ŽELEZNIČKA STANICA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          11B
+                                        </td>
+                                        <td width=500px>
+                                        ŽELEZNIČKA STANICA - LIMAN - BOLNICA - ŽELEZNIČKA STANICA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          12A
+                                        </td>
+                                        <td width=500px>
+                                        CENTAR - TELEP
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          12B
+                                        </td>
+                                        <td width=500px>
+                                        TELEP - CENTAR
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          13A
+                                        </td>
+                                        <td width=500px>
+                                        DETELINARA - GRBAVICA - UNIVERZITET
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          13B
+                                        </td>
+                                        <td width=500px>
+                                        UNIVERZITET - GRBAVICA - DETELINARA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          14A
+                                        </td>
+                                        <td width=500px>
+                                        CENTAR - SAJLOVO
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          14B
+                                        </td>
+                                        <td width=500px>
+                                        SAJLOVO - CENTAR
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          15A
+                                        </td>
+                                        <td width=500px>
+                                        CENTAR - INDUSTRIJSKA ZONA SEVER
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          15B
+                                        </td>
+                                        <td width=500px>
+                                        INDUSTRIJSKA ZONA SEVER - CENTAR
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          16A
+                                        </td>
+                                        <td width=500px>
+                                        ŽELEZNIČKA STANICA - PRISTANI&Scaron;NA ZONA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          16B
+                                        </td>
+                                        <td width=500px>
+                                        PRISTANI&Scaron;NA ZONA - ŽELEZNIČKA STANICA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          17A
+                                        </td>
+                                        <td width=500px>
+                                        BIG CENTAR - CENTAR- ŽELEZNIČKA STANICA - BIG CENTAR
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          21A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - &Scaron;ANGAJ
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          21B
+                                        </td>
+                                        <td width=500px>
+                                        &Scaron;ANGAJ - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          68A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - SREMSKA  KAMENICA (VOJINOVO)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          68B
+                                        </td>
+                                        <td width=500px>
+                                        SREMSKA KAMENICA (VOJINOVO) - NOVI SAD (Ž.S.) 
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          69A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - SREMSKA KAMENICA (ČARDAK)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          69B
+                                        </td>
+                                        <td width=500px>
+                                        SREMSKA KAMENICA (ČARDAK) - NOVI SAD (Ž.S.) 
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          71A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - SREMSKA KAMENICA (BOCKE)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          71B
+                                        </td>
+                                        <td width=500px>
+                                        SREMSKA KAMENICA (BOCKE) - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                        18A
+                                        </td>
+                                        <td width=500px>
+                                        NOVO NASELJE &ndash; DETELINARA &ndash; CENTAR &ndash; LIMAN &ndash; NOVO NASELJE
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                        18B
+                                        </td>
+                                        <td width=500px>
+                                        NOVO NASELJE &ndash; LIMAN &ndash; CENTAR - DETELINARA &ndash; NOVO NASELJE
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                        20A
+                                        </td>
+                                        <td width=500px>
+                                        ŽELEZNIČKA STANICA - LESNINA
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                        20B
+                                        </td>
+                                        <td width=500px>
+                                        ŽELEZNIČKA STANICA - LESNINA
+                                        </td>
+                                        </tr>
+                                                       </table>
+                        </div>
+
+                        <div id="prigradp" class="pop-up">
+                                
+                                      <table class=info-table>
+                                        <tr><th colspan="2">PRIGRADSKE LINIJE</th></tr>
+                                                          <tr>
+                                        <td width=50px>
+                                          22A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - KAĆ
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          22B
+                                        </td>
+                                        <td width=500px>
+                                        KAĆ - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          23A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - BUDISAVA
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          23B
+                                        </td>
+                                        <td width=500px>
+                                        BUDISAVA - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          24A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - KOVILJ
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          24B
+                                        </td>
+                                        <td width=500px>
+                                        KOVILJ - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          30A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - PEJIĆEVI SALA&Scaron;I
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          30B
+                                        </td>
+                                        <td width=500px>
+                                        PEJIĆEVI SALA&Scaron;I - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          35A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.)  - ČENEJ
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          35B
+                                        </td>
+                                        <td width=500px>
+                                        ČENEJ - NOVI SAD (Ž.S.) 
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          35ČLA
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - ČENEJ - LIS
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          35ČLB
+                                        </td>
+                                        <td width=500px>
+                                        ČENEJ - LIS - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          41A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (ZS) - RUMENKA
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          41B
+                                        </td>
+                                        <td width=500px>
+                                        RUMENKA - NOVI SAD (ZS)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          42A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (ZS) - KISAC
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          42B
+                                        </td>
+                                        <td width=500px>
+                                        KISAC - NOVI SAD (ZS)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          43A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (ZS) - STEPANOVICEVO
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          43B
+                                        </td>
+                                        <td width=500px>
+                                        STEPANOVICEVO - NOVI SAD (ZS)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          52A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - VETERNIK
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          52B
+                                        </td>
+                                        <td width=500px>
+                                        VETERNIK - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          53A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - FUTOG STARI
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          53B
+                                        </td>
+                                        <td width=500px>
+                                        FUTOG  STARI - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          54A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - FUTOG (GRMEČKA)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          54B
+                                        </td>
+                                        <td width=500px>
+                                        FUTOG (GRMEČKA) - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          55A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - FUTOG (BRAĆE BO&Scaron;NJAK)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          55B
+                                        </td>
+                                        <td width=500px>
+                                        FUTOG (BRAĆE BO&Scaron;NJAK) - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          56A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - BEGEČ
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          56B
+                                        </td>
+                                        <td width=500px>
+                                        BEGEČ - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          64A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - BUKOVAC
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          64B
+                                        </td>
+                                        <td width=500px>
+                                        BUKOVAC - NOVI SAD (Ž.S.) 
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          72A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - SREMSKA KAMENICA (PARAGOVO)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          72B
+                                        </td>
+                                        <td width=500px>
+                                        SREMSKA KAMENICA (PARAGOVO) - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          73A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - SREMSKA KAMENICA (MO&Scaron;INA VILA)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          73B
+                                        </td>
+                                        <td width=500px>
+                                        SREMSKA KAMENICA (MO&Scaron;INA VILA) - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          74A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - SREMSKA KAMENICA (POPOVICA)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          74B
+                                        </td>
+                                        <td width=500px>
+                                        SREMSKA KAMENICA (POPOVICA) - NOVI SAD (Ž.S.)
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          76A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (Ž.S.) - STARI LEDINCI
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                          76B
+                                        </td>
+                                        <td width=500px>
+                                        STARI LEDINCI - NOVI SAD (Ž.S.) 
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                        51A
+                                        </td>
+                                        <td width=500px>
+                                        ŽELEZNIČKA STANICA - VETERNIK - SAJLOVO - ŽELEZNIČKA STANICA
+                                        </td>
+                                        </tr>
+                                                        <tr>
+                                        <td width=50px>
+                                        51B
+                                        </td>
+                                        <td width=500px>
+                                        ŽELEZNIČKA STANICA - SAJLOVO - VETERNIK - ŽELEZNIČKA STANICA
+                                        </td>
+                                        </tr>
+                                                    </table>
+                        </div>
+                        
+                        <div id="medjumesnip" class="pop-up">
+                                
+                                      <table class=info-table>
+                                        <tr><th colspan="2">MEĐUMESNE LINIJE</th></tr>
+                                                          <tr>
+                                        <td width=50px>
+                                          31A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - BAČKI JARAK
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          31B
+                                        </td>
+                                        <td width=500px>
+                                        BAČKI JARAK - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          32A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - TEMERIN
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          32B
+                                        </td>
+                                        <td width=500px>
+                                        TEMERIN - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          33A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - GOSPOĐINCI
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          33B
+                                        </td>
+                                        <td width=500px>
+                                        GOSPOĐINCI - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          60A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - SREMSKI KARLOVCI (BELILO II)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          60B
+                                        </td>
+                                        <td width=500px>
+                                        SREMSKI KARLOVCI (BELILO II) - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          61A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - SREMSKI KARLOVCI (VINOGRADSKA)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          61B
+                                        </td>
+                                        <td width=500px>
+                                        SREMSKI KARLOVCI (VINOGRADSKA) - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          62A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - SREMSKI KARLOVCI (DUDARA)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          62B
+                                        </td>
+                                        <td width=500px>
+                                        SREMSKI KARLOVCI (DUDARA) - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          77A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - STARI RAKOVAC
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          77B
+                                        </td>
+                                        <td width=500px>
+                                        STARI RAKOVAC - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          78A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - BEOČIN SELO
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          78B
+                                        </td>
+                                        <td width=500px>
+                                        BEOČIN SELO - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          79A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - ČEREVIĆ
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          79B
+                                        </td>
+                                        <td width=500px>
+                                        ČEREVIĆ - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                          80A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - BEOČIN (B.A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                        80B
+                                        </td>
+                                        <td width=500px>
+                                        BEOČIN (B.A.S.) - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                        81A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - BANO&Scaron;TOR
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                        81B
+                                        </td>
+                                        <td width=500px>
+                                        BANO&Scaron;TOR - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                        84A
+                                        </td>
+                                        <td width=500px>
+                                        NOVI SAD (A.S.) - LUG
+                                        </td>
+                                        </tr>
+                                                           <tr>
+                                        <td width=50px>
+                                        84B
+                                        </td>
+                                        <td width=500px>
+                                        LUG - NOVI SAD (A.S.)
+                                        </td>
+                                        </tr>
+                                                       </table>
+                        </div>
+                        
+                        
+                        
+                        
+                                 </div>       

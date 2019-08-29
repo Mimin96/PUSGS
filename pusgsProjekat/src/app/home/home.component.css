@@ -1,0 +1,39 @@
+hr{
+    width: 10%;
+    color: #fff;
+  }
+  
+  .form-group{
+    margin-bottom: 15px;
+  }
+  
+  label{
+    margin-bottom: 15px;
+    font-family: 'Oswald', sans-serif;
+    color: #17a2b8;
+  }
+  
+  input,
+  input::-webkit-input-placeholder {
+    font-size: 16px;
+    padding-top: 3px;
+    color:gray;
+  }
+  
+  .main-center{
+     margin-top: 30px;
+     margin: 0 auto;
+     max-width: 330px;
+    padding: 40px 40px;
+  }
+  
+  .login-button{
+    margin-top: 5px;
+  }
+  
+  .login-register{
+    font-size: 16px;
+    text-align: center;
+    background-color: #17a2b8;
+  }
+  

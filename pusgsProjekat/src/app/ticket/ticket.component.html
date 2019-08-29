@@ -1,0 +1,19 @@
+<div class="main-login main-center"> 
+<p>
+  <select [(ngModel)]="tip" *ngIf = "(korisnik == 'registrovan')" >
+      <option *ngFor="let t of tipovi">
+        {{t}} 
+      </option>
+  </select> 
+  <select [(ngModel)]="tip" *ngIf = "(korisnik == 'neregistrovan')" >
+    <option>
+      Vremenska
+    </option>
+</select>
+  <button (click)="CenaKarte()" >Show the price of tickets </button>
+  <br>
+  {{cena1}}
+  <button (click)="KupiKartu()">Buy ticket </button>
+  {{vaziDo1}}
+</p>
+</div>
