@@ -44,14 +44,7 @@ namespace WebApp.Controllers
         [Authorize(Roles = "Admin")]
         [Route("GetStations")]
         public IEnumerable<Station> GetStationsForLine()
-        {
-            /*  List<string> stationNames = new List<string>();
-              var ss = db.Stations.GetAll();
-              foreach (Station s in ss)
-              {
-                  stationNames.Add(s.Name);
-              }
-              return stationNames;*/
+        {            
             return db.Stations.GetAll();
         }
 

@@ -147,7 +147,7 @@ namespace WebApp.Controllers
 
             }
 
-            //Schedule schaduleFromBase = db.Schedules.GetAll().FirstOrDefault(u => u.Day == dd && u. );
+            
 
             if (scheduleFromBase.Lines.Count == 1)
             {
