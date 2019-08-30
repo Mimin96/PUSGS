@@ -32,7 +32,8 @@ namespace WebApp.Persistence.UnitOfWork
 
         [Dependency]
         public ITicketRepository Tickets { get; set; }
-
+        [Dependency]
+        public IPersonRepository PersonRepository { get; set; }
 
         public DemoUnitOfWork(DbContext context)
         {

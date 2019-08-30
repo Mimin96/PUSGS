@@ -47,6 +47,9 @@ namespace WebApp.Models
         [Display(Name = "LastName")]
         public string LastName { get; set; }
 
+        [Required]
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
 
         [Required]
         [Display(Name = "Address")]
@@ -110,5 +113,16 @@ namespace WebApp.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class LoginBindingModel
+    {
+        [Required]
+        [Display(Name = "Username")]
+        public string Username { get; set; }
+        [Required]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
     }
 }

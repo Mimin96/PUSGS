@@ -9,6 +9,7 @@ namespace WebApp.Persistence.UnitOfWork
 {
     public interface IUnitOfWork : IDisposable
     {
+        IPersonRepository PersonRepository { get; set; }
         IPriceRepository Prices { get; set; }
         ILocationRepository Locations { get; set; }
         IPricelistRepository Pricelists { get; set; }

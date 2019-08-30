@@ -14,7 +14,7 @@ namespace WebApp.Models
         public string Number { get; set; }
         public RouteType RouteType { get; set; }
         public List<Station> Stations { get; set; }
-        public virtual List<Schedule> Schadules { get; set; }
+        public virtual List<Schedule> Schedules { get; set; }
         [Timestamp]
         public byte[] RowVersion { get; set; }
     }
