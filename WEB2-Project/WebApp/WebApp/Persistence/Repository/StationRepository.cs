@@ -11,7 +11,7 @@ namespace WebApp.Persistence.Repository
     {
         public StationRepository(DbContext context) : base(context)
         {
-        }
 
+        }
     }
 }

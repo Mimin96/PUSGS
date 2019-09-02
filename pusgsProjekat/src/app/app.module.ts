@@ -1,76 +1,64 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { AgmCoreModule } from '@agm/core';
 
-import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
-import { LogInComponent } from './log-in/log-in.component';
-import { HomeComponent } from './home/home.component';
-import { ProfilEditorComponent } from './profil-editor/profil-editor.component';
-import { ValidatorEditorComponent } from './validator-editor/validator-editor.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { LoginComponent } from './auth/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
 import { RegisterComponent } from './register/register.component';
-import { PricelistComponent } from './pricelist/pricelist.component';
-import { DrivingLinesComponent } from './driving-lines/driving-lines.component';
-
-import { HttpClientModule }    from '@angular/common/http';
-import { TimetableStationComponent } from './timetable-station/timetable-station.component';
-
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-import { RouterModule, Routes} from '@angular/router'
-import { TempUserComponent } from './temp-user/temp-user.component';
-import { HttpService } from 'src/app/services/http.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from 'src/app/interceptors/token.interceptor';
-import { FormsModule} from '@angular/forms'
-import { AuthHttpService } from 'src/app/services/http/auth.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RedVoznjeHttpService } from './services/redvoznje.service';
-import { TicketComponent } from './ticket/ticket.component';
-import { RegisterService } from './services/register.service';
-import { LoginService } from './services/login.service';
-import { ProfilComponent } from './profil/profil.component';
-import { AuthComponent } from './auth/auth.component';
-
-const routes : Routes = [
-  {path:"home", component: HomeComponent},
-  {path:"login", component: LogInComponent},
-  {path:"registration", component: RegisterComponent},
-  {path:"pricelist", component: PricelistComponent},
-  {path:"timetable-station", component: TimetableStationComponent},
-  {path:"driving-lines", component: DrivingLinesComponent},
-  {path:"tickets", component: TicketComponent},
-  {path:"profil", component: ProfilComponent},
-  {path: "", component: HomeComponent, pathMatch: "full"},
-  {path: "**", redirectTo: "home"}
-]
+import { StartComponent } from './start/start.component';
+import { PriceListComponent } from './price-list/price-list.component';
+import { UnregistredComponent } from './unregistred/unregistred.component';
+import { HeaderComponent } from './header/header.component';
+import { LogoutComponent } from './logout/logout.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { ProfileViewComponent } from './profile-view/profile-view.component';
+import { ValidateProfileComponent } from './validate-profile/validate-profile.component';
+import { ValidateTicketComponent } from './validate-ticket/validate-ticket.component';
+import { ScheduleAdminComponent } from './components/schedule-admin/schedule-admin.component';
+import { JwtInterceptor } from './auth/jwt-interceptor';
+import { PriceListAdminComponent } from './components/price-list-admin/price-list-admin.component';
+import { AdminStationComponent } from './admin-station/admin-station.component';
+import { MapComponent } from './admin-station/map/map.component';
+import { LineMeshComponent } from './line-mesh/line-mesh.component';
+import { LineMeshAdminComponent } from './components/line-mesh-admin/line-mesh-admin.component';
+import { VehicleLocationComponent } from './vehicle-location/vehicle-location.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LogInComponent,
-    HomeComponent,
-    ProfilEditorComponent,
-    ValidatorEditorComponent,
-    NavbarComponent,
+    LoginComponent,
     RegisterComponent,
-    PricelistComponent,
-    DrivingLinesComponent,
-    TimetableStationComponent,
-    TempUserComponent,
-    TicketComponent,
-    ProfilComponent,
-    AuthComponent
+    StartComponent,
+    PriceListComponent,
+    UnregistredComponent,
+    HeaderComponent,
+    LogoutComponent,
+    ScheduleComponent,
+    ScheduleAdminComponent,
+    ProfileViewComponent,
+    ValidateProfileComponent,
+    ValidateTicketComponent,
+    AdminStationComponent,
+    MapComponent,
+    PriceListAdminComponent,
+    LineMeshComponent,
+    LineMeshAdminComponent,
+    VehicleLocationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyDnihJyw_34z5S1KZXp90pfTGAqhFszNJk'})
+
   ],
-  providers: [HttpService, {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},AuthHttpService,RedVoznjeHttpService, RegisterService, LoginService ],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

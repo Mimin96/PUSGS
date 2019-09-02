@@ -1,101 +1,95 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { FormArray } from '@angular/forms';
-import { AuthHttpService } from 'src/app/services/http/auth.service';
-import { User, Osoba } from 'src/app/temp-user/osoba';
-import { NgForm } from '@angular/forms';
+import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
-import { RegisterService } from '../services/register.service';
-declare var getDate: any;
-declare var initDatePicker: any;
+import { RegisterService } from './registerService';
+import { ImageMoj } from './slika';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
-  private submitted: boolean = false;
-  private user: User;
-  private role: string;  
-  private fileToUpload: File = null;
-  //private userTypes: UserType[];
-  private showImageInput: boolean = false;
-  private types = ['Regular', 'Controlor', 'Admin'];
-  registacijaForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
-    username: ['', Validators.required],
-    password: ['', Validators.required],
-    confirmPassword: ['', Validators.required],
-    email: ['', Validators.required],
-    date: ['', Validators.required],
-    tip: ['', Validators.required]
+export class RegisterComponent {
+
+  fd:FormData;
+  mySrc;
+  canUpload:boolean;
+  message:string;
+
+  registerForm = this.fb.group({
+    Email: ['', Validators.required],
+    Password: ['', Validators.required],
+    ConfirmPassword: ['', Validators.required],
+    Name: ['', Validators.required],
+    LastName: ['', Validators.required],
+    BirthdayDate:['',Validators.required],
+    Address: ['', Validators.required],
+    Picture: [''],
+    PassengerType:[],
+    State:[''],
+
   });
-  
-  constructor(private http: AuthHttpService, private fb: FormBuilder, private router: Router, private registerService: RegisterService) { }
-  
-    ngOnInit() {
-      
-    }
-  
-    register(){
-      let regModel: User = this.registacijaForm.value;
-      this.http.registration(regModel);
-      this.router.navigate(['/login']); //login
-      //form.reset();
-    }
 
-    onSubmit(f: NgForm) {
-      // Check for date value
-      let date = getDate();
-      
-      // jesus christ man
-      this.user = new User(f.value.firstName, f.value.lastName, f.value.email, f.value.username, 
-                           f.value.password, f.value.confirmPassword, f.value.address,
-                           date);
-
-
-
-
-
-      console.log(this.user);
-      
-      this.submitted = true;  // animation
+  constructor(public registerService: RegisterService, private fb: FormBuilder) {
+    this.canUpload=false;
+    this.message="";
+  }
   
-      // admin adding a new ticket inspector? 
-      
-  
-      
-      this.registerService.registerUser(this.user/*, this.fileToUpload*/).subscribe( 
-        (response) => {
-          this.submitted = false;  // animation
-  
-            //this.notificationService.notifyEvent.emit('Successfully registered. You can now log in.');
-            
-        },
-    
-          /*(error) => {       
-            this.submitted = false;  // animation
-            //this.notificationService.notifyEvent.emit('An error ocurred during registration. Please, try again.');
-  
-            if(error.status !== 0){
-              // Notify the user about errors from WebAPI (validation error reply)
-              let regReply = JSON.parse(error._body);
-              let errorMessages = Object.values(regReply.ModelState);
-              if(errorMessages.length > 0) {
-                for(let i = 0; i < errorMessages.length; i++){
-                  this.notificationService.notifyEvent.emit(errorMessages[i][0]);
-                }
-              }
-            } 
-  
-          }*/
-        );
-        this.router.navigate(['/login']); //login
+  hit(){
+    this.canUpload=true;
+  }  
+  unHit(){
+    this.canUpload=false;
+  }
+ register(){
+    //this.router.navigate(["/home"]);
+
+    if(this.registerForm.controls['Password'].value == this.registerForm.controls['ConfirmPassword'].value){
+      if(this.registerForm.controls['PassengerType'].value!=null){
+        this.message="";
+        if(this.registerForm.controls['Picture'].value != ""){    
+          this.registerForm.controls['Picture'].setValue(this.base64textString);
+        }else{
+          this.registerForm.controls['Picture'].setValue("nema slike");
+        }
+        this.registerForm.controls['State'].setValue(0);
+        //this.registerForm.controls['BirthdayDate'].setValue(this.registerForm.controls['BirthdayDate'].value);
+
+        this.registerService.registrate(this.registerForm.value).subscribe((data) => {
+          this.message = data;
+          
+        });
+        //this.router.navigate(["/login"]);
+      }else{
+        this.message="Please tell us what you are..";
+
       }
-      
+    }else{
+      this.message="Passwords does not match.";
+    }
+  }
+
+  private base64textString:string="";
+  
+  handleFileSelect(evt){
+      var files = evt.target.files;
+      var file = files[0];
     
-      
+    if (files && file) {
+        var reader = new FileReader();
+
+        reader.onload =this._handleReaderLoaded.bind(this);
+
+        reader.readAsBinaryString(file);
+    }
+  }
+  
+  _handleReaderLoaded(readerEvt) {
+     var binaryString = readerEvt.target.result;
+            this.base64textString= btoa(binaryString);
+            alert(btoa(binaryString));
+            this.mySrc="data:image/png;base64," + this.base64textString;
     }
 
+
+}

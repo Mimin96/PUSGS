@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApp.Models;
+using WebApp.Persistence;
 using WebApp.Persistence.UnitOfWork;
 using static WebApp.Models.Enums;
 
@@ -15,8 +16,8 @@ namespace WebApp.Controllers
     [Authorize]
     [RoutePrefix("api/Tickets")]
     public class TicketsController : ApiController
-    {      
-      
+    {
+        //private ApplicationDbContext db = new ApplicationDbContext();
         private IUnitOfWork db;
         public TicketsController(IUnitOfWork db)
         {
@@ -150,7 +151,9 @@ namespace WebApp.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }            
+            }
+
+            
 
             TicketType type = Enums.TicketType.Hourly;
             if (TypeOfTicket == "One-hour")
@@ -173,30 +176,7 @@ namespace WebApp.Controllers
 
             var user = Request.GetOwinContext().Authentication.User.Identity.Name;
 
-            if (user == null)//neregistrovan
-            {
-                MailMessage mail = new MailMessage("izvini.moram@gmail.com", UserName);
-                SmtpClient client = new SmtpClient();
-                client.Port = 587;
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.UseDefaultCredentials = true;
-                client.Credentials = new NetworkCredential("izvini.moram@gmail.com", "izvinimoram33");
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.EnableSsl = true;
-                client.Host = "smtp@gmail.com";
-                mail.Subject = "Public City Transport Serbia";
-                mail.Body = $"You successfully bought ticket at {DateTime.Now}. {Environment.NewLine} Your ticket id is: {ticket.IdTicket} {Environment.NewLine}Thank you!";
-
-                try
-                {
-                    client.Send(mail);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return InternalServerError(e);
-                }
-            }
+           
 
             return Ok();
         }

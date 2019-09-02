@@ -1,41 +1,22 @@
-.login-register-form-section {
-    max-width: 350px;
-    margin: 0 auto;
-}
-.login-register-form-section i {
-    width: 10px;
-}
-.login-register-form-section .nav-tabs > li > a {
-    color: #2abb9b;
+th, td {
+    padding: 4px;
+    text-align: left;
 }
 
-.login-register-form-section .nav-tabs > li.active > a {
-    background-color: #2abb9b;
-    border-color: #2abb9b;
-    color: white;
+/* body {
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: black;
+} */
+
+table{
+    font: 20px Montserrat, sans-serif;
+    line-height: 1.8;
+    color: black;
 }
-.login-register-form-section .nav-tabs > li > a, 
-.login-register-form-section .nav-tabs > li.active > a {
-    width: 160px;
-    text-align: center; 
-    border-radius: 0;
-}
-.login-register-form-section .nav-tabs {
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-.login-register-form-section .btn-custom {
-    width: 100%;
-    background-color: #2abb9b;
-    border-color: #2abb9b;
-    margin-bottom: 0.5em;
-    border-radius: 0;
-}
-.login-register-form-section .btn-custom:hover {
-    width: 100%;
-    background-color: #48A497;
-    border-color: #2abb9b;
-}
-.login-register-form-section .form-group {
-    padding: 0 20px;
+/* tr:nth-child(odd){background-color: black; color: white} */
+h2{
+    font: 30px Montserrat, sans-serif;
+    color:#3eb0f1;
+    font-weight: bold;
 }

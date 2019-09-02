@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using WebApp.Lists;
+using WebApp.Dto;
 using WebApp.Models;
 using WebApp.Persistence.UnitOfWork;
 using static WebApp.Models.Enums;
@@ -24,24 +25,25 @@ namespace WebApp.Controllers
         }
 
         public LinesController(IUnitOfWork db)
-        {           
+        {
+
+            
+
             this.db = db;
         }
 
-        //////////////////////////////////////////////////////////////4
         [AllowAnonymous]
         [Route("GetLines")]
-        public IEnumerable<LineStation> GetLines()
+        public IEnumerable<LinePlus> GetLines()
         {
-            //LineStation, zbog fronta
             List<Line> lines = db.Lines.GetAll().ToList();
-            List<LineStation> ret = new List<LineStation>();
+            List<LinePlus> ret = new List<LinePlus>();
 
             foreach (Line l in lines)
             {
-                RouteType type = l.RouteType; 
-                LineStation ls = new LineStation() { Number = l.Number, IDtypeOfLine = 0, TypeOfLine = type.ToString(), Stations = l.Stations };
-                ret.Add(ls);
+                RouteType type = l.RouteType; //db.TypesOfLine.GetAll().FirstOrDefault(u => u.IDtypeOfLine == l.IDtypeOfLine).typeOfLine;
+                LinePlus lp = new LinePlus() { Number = l.Number, IDtypeOfLine = 0, TypeOfLine = type.ToString(), Stations = l.Stations};
+                ret.Add(lp);
             }
 
             return ret;
@@ -49,26 +51,27 @@ namespace WebApp.Controllers
 
         [AllowAnonymous]
         [Route("GetScheduleLines")]
-        public IEnumerable<LineStation> GetScheduleLines(string typeOfLine)
+        public IEnumerable<LinePlus> GetScheduleLines(string typeOfLine)
         {
 
             if (typeOfLine == null)
             {
-                var type = db.Lines.GetAll().FirstOrDefault(u => u.RouteType == Enums.RouteType.Town);
-                
+                var type = db.Lines.GetAll().FirstOrDefault(u => u.RouteType == Enums.RouteType.Town);                
                 List<Line> lines = db.Lines.GetAll().ToList();
-                List<LineStation> ret = new List<LineStation>();
+                List<LinePlus> ret = new List<LinePlus>();
 
                 foreach (Line l in lines)
-                {                    
-                    LineStation lp = new LineStation() { Number = l.Number, IDtypeOfLine = 0, TypeOfLine = type.ToString(), Stations = l.Stations };
+                {
+                    
+                    LinePlus lp = new LinePlus() { Number = l.Number, IDtypeOfLine = 0, TypeOfLine = type.ToString(), Stations = l.Stations };
                     ret.Add(lp);
                 }
 
                 return ret;
             }
             else
-            {              
+            {
+                
                 RouteType type = Enums.RouteType.Town;
                 if (typeOfLine == "Town")
                 {
@@ -79,20 +82,23 @@ namespace WebApp.Controllers
                     type = Enums.RouteType.Suburban;
                 }
                 List<Line> lines = db.Lines.GetAll().ToList();
-                List<LineStation> ret = new List<LineStation>();
+                List<LinePlus> ret = new List<LinePlus>();
 
                 foreach (Line l in lines)
                 {
                     if (l.RouteType == type)
-                    {                    
-                        LineStation lp = new LineStation() { Number = l.Number, IDtypeOfLine = 0, TypeOfLine = type.ToString(), Stations = l.Stations };
+                    {
+                        
+                        LinePlus lp = new LinePlus() { Number = l.Number, IDtypeOfLine = 0, TypeOfLine = type.ToString(), Stations = l.Stations };
                         ret.Add(lp);
                     }
                 }
 
                 return ret;
+                
             }
         }
+        
 
         [AllowAnonymous]
         [Route("GetSchedule")]
@@ -103,7 +109,7 @@ namespace WebApp.Controllers
             {
                 //return BadRequest();
             }
-            ///////////////////////////////////////////////////
+
             RouteType type = Enums.RouteType.Town;
             if (typeOfLine == "Town")
             {
@@ -114,7 +120,7 @@ namespace WebApp.Controllers
                 type = Enums.RouteType.Suburban;
             }
 
-            DayType day = DayType.Workday; 
+            DayType day = DayType.Workday;
             if (typeOfDay == "Work day")
             {
                 day = Enums.DayType.Workday;
@@ -128,10 +134,11 @@ namespace WebApp.Controllers
             var lines = db.Lines.GetAll();
             foreach (var line in lines)
             {
-                if (line.Number == Number)
+                if(line.Number == Number)
                 {
-                    foreach (var dep in line.Schedules)
-                    {                       
+                    foreach (var dep in line.Schadules)
+                    {
+                       
 
                         ScheduleLine sl = new ScheduleLine();
                         sl.Number = line.Number;
@@ -152,12 +159,15 @@ namespace WebApp.Controllers
         [Route("GetScheduleAdmin")]
         public IEnumerable<ScheduleLine> GetScheduleAdmin()
         {
+            var sc = db.Schadules.GetAll();
+            
             List<ScheduleLine> schedule = new List<ScheduleLine>();
             var lines = db.Lines.GetAll();
             foreach (var line in lines)
             {
-                foreach (var dep in line.Schedules)
-                {                   
+                foreach (var dep in line.Schadules)
+                {
+                    
 
                     ScheduleLine sl = new ScheduleLine();
                     sl.Number = line.Number;
@@ -198,9 +208,9 @@ namespace WebApp.Controllers
 
         [Authorize(Roles = "Admin")]
         [Route("AddLine")]
-        public string AddLine(LineStation lineStation)
+        public string AddLine(LinePlus linePlus)
         {
-            Line line = db.Lines.GetAll().FirstOrDefault(u => u.Number == lineStation.Number);
+            Line line = db.Lines.GetAll().FirstOrDefault(u => u.Number == linePlus.Number);
 
 
             if (line != null)
@@ -211,18 +221,18 @@ namespace WebApp.Controllers
             {
                 RouteType id = RouteType.Town;
 
-                if (lineStation.TypeOfLine == "Town")
+                if (linePlus.TypeOfLine == "Town")
                 {
                     id = Enums.RouteType.Town;
                 }
-                else if (lineStation.TypeOfLine == "Suburban")
+                else if (linePlus.TypeOfLine == "Suburban")
                 {
                     id = Enums.RouteType.Suburban;
                 }
-
-                Line newLine = new Line() { Number = lineStation.Number, RouteType = id };
+                
+                Line newLine = new Line() { Number = linePlus.Number, RouteType = id };
                 newLine.Stations = new List<Station>();
-                foreach (Station s in lineStation.Stations)
+                foreach (Station s in linePlus.Stations)
                 {
                     var station = db.Stations.GetAll().FirstOrDefault(u => u.Name == s.Name);
                     newLine.Stations.Add(station);
@@ -245,10 +255,10 @@ namespace WebApp.Controllers
 
         [Authorize(Roles = "Admin")]
         [Route("EditLine")]
-        public string EditLine(LineStation lineStation)
+        public string EditLine(LinePlus linePlus)
         {
             int result = 1;
-            Line line = db.Lines.GetAll().FirstOrDefault(u => u.Number == lineStation.Number);
+            Line line = db.Lines.GetAll().FirstOrDefault(u => u.Number == linePlus.Number);
 
             if (line == null)
             {
@@ -256,15 +266,16 @@ namespace WebApp.Controllers
             }
             else
             {
-                if (line.Number != lineStation.Number)
+                if (line.Number != linePlus.Number)
                 {
                     return "Data was modified in meantime, please try again!";
-                }               
+                }
+
 
                 line.Stations = new List<Station>();
-                if (lineStation.Stations != null)
+                if (linePlus.Stations != null)
                 {
-                    foreach (Station s in lineStation.Stations)
+                    foreach (Station s in linePlus.Stations)
                     {
                         var station = db.Stations.GetAll().FirstOrDefault(u => u.Name == s.Name);
                         line.Stations.Add(station);
@@ -272,11 +283,11 @@ namespace WebApp.Controllers
                     }
                 }
 
-                if (lineStation.TypeOfLine == "Town")
+                if (linePlus.TypeOfLine == "Town")
                 {
                     line.RouteType = Enums.RouteType.Town;
                 }
-                else if (lineStation.TypeOfLine == "Suburban")
+                else if(linePlus.TypeOfLine == "Suburban")
                 {
                     line.RouteType = Enums.RouteType.Suburban;
                 }
@@ -296,8 +307,54 @@ namespace WebApp.Controllers
             return "ok";
         }
 
+        [Authorize(Roles = "Admin")]
+        [Route("PostLineSchedule")]
+        // POST: api/Lines
+        // [ResponseType(typeof(Line))]
+        public IHttpActionResult PostLine([FromBody] ScheduleLine sl)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            DayType idd = DayType.Workday;
+
+            if (sl.Day == "Work day")
+                idd = DayType.Workday; 
+            else
+                idd = DayType.Weekend; 
+
+            Schadule s = new Schadule { Day = idd, DepartureTime = sl.Time.ToString() };
+            var line = db.Lines.GetAll().FirstOrDefault(u => u.Number == sl.Number);
+            if (s.Lines == null)
+                s.Lines = new List<Line>();
+            s.Lines.Add(line);
+
+            db.Schadules.Add(s);
+
+            line.Schadules.Add(s);
+            db.Lines.Update(line);
+
+            try
+            {
+                db.Complete();
+            }
+            catch (DbUpdateException)
+            {
+
+            }
+
+            return CreatedAtRoute("DefaultApi", new { id = line.Number }, line);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [Route("DeleteLine/{Number}")]
+        // DELETE: api/Lines/5
+        [ResponseType(typeof(Line))]
         public IHttpActionResult DeleteLine(string Number)
         {
+            
             List<Line> lines = db.Lines.GetAll().ToList();
             Line line = null;
 

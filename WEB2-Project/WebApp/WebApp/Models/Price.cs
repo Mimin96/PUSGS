@@ -13,6 +13,6 @@ namespace WebApp.Models
         public int IdPrice { get; set; }
         public TicketType Type { get; set; }
         public double Value { get; set; }
-        public List<Pricelist> Pricelists { get; set; }
+        public List<PriceList> Pricelists { get; set; }
     }
 }

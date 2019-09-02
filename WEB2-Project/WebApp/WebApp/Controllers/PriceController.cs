@@ -16,6 +16,7 @@ namespace WebApp.Controllers
     [RoutePrefix("api/Price")]
     public class PriceController : ApiController
     {
+
         private IUnitOfWork _unitOfWork;
         private DbContext _db;
 
@@ -43,7 +44,7 @@ namespace WebApp.Controllers
             else if (ticket == "Year")
                 ticketType = Enums.TicketType.Annual;
 
-            List<Pricelist> priceLists = _unitOfWork.Pricelists.GetAll().OrderByDescending(u => u.StartDate).ToList();
+            List<PriceList> priceLists = _unitOfWork.PriceLists.GetAll().OrderByDescending(u => u.StartDate).ToList();
             TicketType idType = _unitOfWork.Tickets.GetAll().FirstOrDefault(u => u.Type == ticketType).Type;
 
             List<Price> prices = _unitOfWork.Prices.GetAll().ToList();
@@ -56,7 +57,7 @@ namespace WebApp.Controllers
                 }
             }
 
-            foreach (Pricelist pl in priceLists)
+            foreach (PriceList pl in priceLists)
             {
                 if (pl.Prices != null)
                 {
@@ -72,8 +73,7 @@ namespace WebApp.Controllers
 
             return null;
         }
-
-        //Mora se izmeniti
+               
 
         [AllowAnonymous]
         [Route("GetOnePrice")]
@@ -95,7 +95,7 @@ namespace WebApp.Controllers
             else if (ticket == "Year")
                 ticketType = Enums.TicketType.Annual;
 
-            //var userr = _unitOfWork.TypesOfUser.GetAll().FirstOrDefault(u => u.typeOfUser == user);
+            
             PassengerType userType = Enums.PassengerType.Regular;
 
             if (user == "Regular")
@@ -105,9 +105,9 @@ namespace WebApp.Controllers
             else if (user == "Pensioner")
                 userType = Enums.PassengerType.Pensioner;
 
-            double pretenge = 1; //popust
+            double pretenge = 1; 
 
-            double popust = 0; //(double)userr.Percentage;
+            double popust = 0; 
 
             var tickett = _unitOfWork.Tickets.GetAll().FirstOrDefault(u => u.Type == ticketType);
 
@@ -117,7 +117,7 @@ namespace WebApp.Controllers
 
             double priceRet = pricee.Value;
 
-            if (user == "Student" || user == "Pensioner")
+            if(user == "Student" || user == "Pensioner")
             {
                 popust = 10;
                 pretenge = popust / 100;
@@ -128,7 +128,7 @@ namespace WebApp.Controllers
             if (pricee == null)
                 return 0;
 
-            return priceRet; //cena sa popustom
+            return priceRet; 
         }
 
         [Authorize(Roles = "AppUser")]
@@ -156,7 +156,9 @@ namespace WebApp.Controllers
 
             var tickett = _unitOfWork.Tickets.GetAll().FirstOrDefault(u => u.Type == ticketType); //koja karta
 
-            var pricee = getLatestPrice(ticket);
+            var pricee = getLatestPrice(ticket);// _unitOfWork.Prices.GetAll().FirstOrDefault(u => u.IDtypeOfTicket == tickett.IDtypeOfTicket);//koliko kosta
+            //var userr = _unitOfWork.TypesOfUser.GetAll().FirstOrDefault(u => u.IDtypeOfUser == apUs.IDtypeOfUser);
+            //double popust = (double)userr.Percentage;
             double popust = 5;
 
             double priceRet = pricee.Value;
@@ -168,8 +170,10 @@ namespace WebApp.Controllers
                 priceRet = pricee.Value - pricee.Value * pretenge;
             }
 
-
+            
             return priceRet;
         }
+
+
     }
 }

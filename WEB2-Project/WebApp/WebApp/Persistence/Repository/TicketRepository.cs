@@ -11,6 +11,7 @@ namespace WebApp.Persistence.Repository
     {
         public TicketRepository(DbContext context) : base(context)
         {
+
         }
     }
 }

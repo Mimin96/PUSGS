@@ -9,7 +9,6 @@ namespace WebApp.Persistence.Repository
 {
     public class PriceRepository : Repository<Price, int>, IPriceRepository
     {
-
         public PriceRepository(DbContext context) : base(context)
         {
 

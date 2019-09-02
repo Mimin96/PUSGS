@@ -13,8 +13,7 @@ namespace WebApp.Controllers
     [Authorize]
     [RoutePrefix("api/Station")]
     public class StationsController : ApiController
-    {
-        //private ApplicationDbContext db = new ApplicationDbContext();
+    {  
         private IUnitOfWork db;
         public StationsController(IUnitOfWork db)
         {
@@ -78,7 +77,7 @@ namespace WebApp.Controllers
         [Authorize(Roles = "Admin")]
         [Route("Add")]
         [ResponseType(typeof(Station))]
-        public IHttpActionResult PostStation([FromBody]Station station)
+        public IHttpActionResult PostStation(Station station)
         {
             int result = 1;
             if (!ModelState.IsValid)
@@ -127,7 +126,7 @@ namespace WebApp.Controllers
 
             foreach (var s in stations)
             {
-                if (id == s.Name)
+                if(id == s.Name)
                 {
                     station = db.Stations.Get(s.IdStation);
                 }

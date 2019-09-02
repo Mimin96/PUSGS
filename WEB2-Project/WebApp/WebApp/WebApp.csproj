@@ -253,24 +253,60 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinesController.cs" />
     <Compile Include="Controllers\PriceController.cs" />
-    <Compile Include="Controllers\PricelistController.cs" />
+    <Compile Include="Controllers\PriceListsController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\StationsController.cs" />
     <Compile Include="Controllers\TicketsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Dto\LinePlus.cs" />
+    <Compile Include="Dto\PriceListLine.cs" />
+    <Compile Include="Dto\ScheduleLine.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Lists\LineStation.cs" />
-    <Compile Include="Lists\PricelistLine.cs" />
-    <Compile Include="Lists\ScheduleLine.cs" />
     <Compile Include="Migrations\201905222056072_InitialMigration.cs" />
     <Compile Include="Migrations\201905222056072_InitialMigration.Designer.cs">
       <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201908291758150_AddedModelMigration.cs" />
-    <Compile Include="Migrations\201908291758150_AddedModelMigration.Designer.cs">
-      <DependentUpon>201908291758150_AddedModelMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201907281342385_CreateModel.cs" />
+    <Compile Include="Migrations\201907281342385_CreateModel.Designer.cs">
+      <DependentUpon>201907281342385_CreateModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907281508435_CreateNewModel.cs" />
+    <Compile Include="Migrations\201907281508435_CreateNewModel.Designer.cs">
+      <DependentUpon>201907281508435_CreateNewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907281512314_AddedLocation.cs" />
+    <Compile Include="Migrations\201907281512314_AddedLocation.Designer.cs">
+      <DependentUpon>201907281512314_AddedLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907292011332_NewMigration.cs" />
+    <Compile Include="Migrations\201907292011332_NewMigration.Designer.cs">
+      <DependentUpon>201907292011332_NewMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908201956450_LineScheduleMigration.cs" />
+    <Compile Include="Migrations\201908201956450_LineScheduleMigration.Designer.cs">
+      <DependentUpon>201908201956450_LineScheduleMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908211628461_KontrolerMigration.cs" />
+    <Compile Include="Migrations\201908211628461_KontrolerMigration.Designer.cs">
+      <DependentUpon>201908211628461_KontrolerMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908241611143_UserMigration.cs" />
+    <Compile Include="Migrations\201908241611143_UserMigration.Designer.cs">
+      <DependentUpon>201908241611143_UserMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908261947283_SchaduleLineMigration.cs" />
+    <Compile Include="Migrations\201908261947283_SchaduleLineMigration.Designer.cs">
+      <DependentUpon>201908261947283_SchaduleLineMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908281202262_TicketMigration.cs" />
+    <Compile Include="Migrations\201908281202262_TicketMigration.Designer.cs">
+      <DependentUpon>201908281202262_TicketMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908281717118_LineStationRowVersionMigration.cs" />
+    <Compile Include="Migrations\201908281717118_LineStationRowVersionMigration.Designer.cs">
+      <DependentUpon>201908281717118_LineStationRowVersionMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -280,27 +316,25 @@
     <Compile Include="Models\Line.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Price.cs" />
-    <Compile Include="Models\Pricelist.cs" />
-    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\PriceList.cs" />
+    <Compile Include="Models\Schadule.cs" />
     <Compile Include="Models\Station.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Persistence\Repository\ILineRepository.cs" />
     <Compile Include="Persistence\Repository\ILocationRepository.cs" />
-    <Compile Include="Persistence\Repository\IPersonRepository.cs" />
-    <Compile Include="Persistence\Repository\IPricelistRepository.cs" />
+    <Compile Include="Persistence\Repository\IPriceListRepository.cs" />
     <Compile Include="Persistence\Repository\IPriceRepository.cs" />
     <Compile Include="Persistence\Repository\IRepository.cs" />
-    <Compile Include="Persistence\Repository\IScheduleRepository.cs" />
+    <Compile Include="Persistence\Repository\ISchaduleRepository.cs" />
     <Compile Include="Persistence\Repository\IStationRepository.cs" />
     <Compile Include="Persistence\Repository\ITicketRepository.cs" />
     <Compile Include="Persistence\Repository\LineRepository.cs" />
     <Compile Include="Persistence\Repository\LocationRepository.cs" />
-    <Compile Include="Persistence\Repository\PersonRepository.cs" />
-    <Compile Include="Persistence\Repository\PricelistRepository.cs" />
+    <Compile Include="Persistence\Repository\PriceListRepository.cs" />
     <Compile Include="Persistence\Repository\PriceRepository.cs" />
     <Compile Include="Persistence\Repository\Repository.cs" />
-    <Compile Include="Persistence\Repository\ScheduleRepository.cs" />
+    <Compile Include="Persistence\Repository\SchaduleRepository.cs" />
     <Compile Include="Persistence\Repository\StationRepository.cs" />
     <Compile Include="Persistence\Repository\TicketRepository.cs" />
     <Compile Include="Persistence\UnitOfWork\DemoUnitOfWork.cs" />
@@ -406,8 +440,35 @@
     <EmbeddedResource Include="Migrations\201905222056072_InitialMigration.resx">
       <DependentUpon>201905222056072_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201908291758150_AddedModelMigration.resx">
-      <DependentUpon>201908291758150_AddedModelMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907281342385_CreateModel.resx">
+      <DependentUpon>201907281342385_CreateModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907281508435_CreateNewModel.resx">
+      <DependentUpon>201907281508435_CreateNewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907281512314_AddedLocation.resx">
+      <DependentUpon>201907281512314_AddedLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907292011332_NewMigration.resx">
+      <DependentUpon>201907292011332_NewMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908201956450_LineScheduleMigration.resx">
+      <DependentUpon>201908201956450_LineScheduleMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908211628461_KontrolerMigration.resx">
+      <DependentUpon>201908211628461_KontrolerMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908241611143_UserMigration.resx">
+      <DependentUpon>201908241611143_UserMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908261947283_SchaduleLineMigration.resx">
+      <DependentUpon>201908261947283_SchaduleLineMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908281202262_TicketMigration.resx">
+      <DependentUpon>201908281202262_TicketMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908281717118_LineStationRowVersionMigration.resx">
+      <DependentUpon>201908281717118_LineStationRowVersionMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

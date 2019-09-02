@@ -6,7 +6,7 @@ using System.Web;
 
 namespace WebApp.Models
 {
-    public class Pricelist
+    public class PriceList
     {
         [Key]
         public int IdPriceList { get; set; }

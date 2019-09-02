@@ -1,75 +1,75 @@
-<title>Register</title>
-  <br>
-  <div class="row">
-      <div class="container">
-          <div class="login-register-form-section">
-              <div class="col-md-12 text-center">
-                  <h1 class="active">Register</h1>
-              </div>                  
-              <form [formGroup] = "registacijaForm" (ngSubmit)="register()">
-                      <div class="form-group ">
-                          <div class="input-group">
-                              <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                              <input type="text" formControlName="username" class="form-control" placeholder="Username" required="required" value="">
-                          </div>
-                      </div>
-                      <div class="form-group ">
-                          <div class="input-group">
-                              <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                              <input type="text" formControlName="firstName" class="form-control" placeholder="First name" required="required" value="">
-                          </div>
-                      </div>
-                      <div class="form-group ">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-male"></i></div>
-                            <input type="text" formControlName="lastName" class="form-control" placeholder="Last name" required="required" value="">
-                        </div>
-					</div>
-					<div class="form-group ">
-							<div class="input-group">
-								<div class="input-group-addon"><i class="fa fa-info"></i></div>
-								<select formControlName="tip" class="form-control" placeholder="Type" required="required">
-										<option value="student">Student</option>
-										<option value="penzioner">Penzioner</option>
-										<option value="regularan">Regularan</option>									
-									  </select>
-							</div>
-						</div>
-						<!-- <div class="form-group">
-								<label>
-									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<label for="userTypeSelect">User type:</label>
-									<select id="userTypeSelect" class="form-control" required ngModel name="userType" #userType="ngModel" >
-										<option *ngFor="let t of types; let i = index" [value]="i"> {{ t }}</option>               
-								  	</select>
-								</label>
-							</div> -->
-                      <div class="form-group ">
-                          <div class="input-group">
-                              <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
-                              <input type="email" formControlName="email" class="form-control" placeholder="Email" required="required" value="">
-                          </div>
-                      </div>
-                      <div class="form-group ">
-                          <div class="input-group">
-                              <div class="input-group-addon"><i class="fa fa-lock"></i></div>
-                              <input type="password" formControlName="password"  class="form-control" placeholder="Password" required="required">
-                          </div>
-                      </div>
-                      <div class="form-group ">
-                          <div class="input-group">
-                              <div class="input-group-addon"><i class="fa fa-lock"></i></div>
-                              <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password" required="required">
-                          </div>
-                      </div>
-                      <div class="form-group ">
-                        <div class="input-group">
-                            <div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>
-                            <input type="date" formControlName="date"  class="form-control" placeholder="Confirm Password" required="required">
-                        </div>
-                    </div>
-                      <input type="submit" value="Register" class="btn btn-success btn-custom">
-                </form>
-          </div>
-      </div>
-  </div>
+<h2 align="center">Register</h2>
+<hr>
+<form [formGroup]="registerForm" (ngSubmit)="register()" enctype="multipart/form-data">
+<table align="center" border='1'>
+		<tr align="center">
+			<th  id="Naslov" colspan=2>Please fill out the form!</th>
+    </tr>
+    
+    <tr>
+        <th>Email:</th>
+        <td> <input type="email" formControlName="Email" required placeholder="email@email.com" ></td>
+      </tr>
+      <tr>
+          <th>Password:</th>
+          <td> <input type="password" formControlName="Password" required placeholder="6 character minimum"></td>
+        </tr>
+        <tr>
+            <th>Repeat password:</th>
+            <td> <input type="password" formControlName="ConfirmPassword" required placeholder="type password again"></td>
+          </tr>
+
+    	<tr>
+			<th colspan="2">Personal informations</th>
+		</tr>	
+		<tr>
+			<th>First name:</th>
+			<td> <input type="text" formControlName="Name" required placeholder="eg. John"></td>
+		</tr>	
+		
+		<tr>
+			<th>Last name:</th>
+			<td><input type="text" formControlName="LastName" required placeholder="eg. Mark"></td>
+		</tr>
+	
+        <tr>
+            <th>Date of birth</th>
+            <td><input type="date" formControlName="BirthdayDate" required></td>
+          </tr>
+              <tr>
+                  <th>Address:</th>
+                  <td><input type="text" formControlName="Address" placeholder="eg. Street 88"></td>
+                </tr>
+      <tr>
+
+			<th>You are:</th>
+			<td>
+        <input (click)="hit()" type="radio" formControlName="PassengerType" value="1">&nbsp;Student
+        <input (click)="hit()" type="radio" formControlName="PassengerType" value="2">&nbsp;Pensioner
+        <input (click)="unHit()" type="radio" formControlName="PassengerType" value="3">&nbsp;Regular
+
+			</td>
+		</tr>
+  
+  
+    <tr *ngIf="canUpload">
+        <th>Document:  </th>
+        <td>
+            <label formControlName="Picture" for="filePicker">Choose or drag a file:</label><br>
+            <input type="file" id="filePicker" (change)="handleFileSelect($event)">
+            <img [src]="mySrc" />
+            </td>
+      </tr>	
+ 
+		<tr>
+		<th colspan="2"><button type="submit"  [disabled]="!registerForm.valid">Register</button></th>
+		</tr>
+		
+    </table>
+  </form>
+  <h5 *ngIf="!registerForm.valid" align="center" style=" font: 20px Montserrat, sans-serif;color:#72909e;">&nbsp;Form is not valid</h5>
+
+  <h5 *ngIf="message" align="center" style=" font: 23px Montserrat, sans-serif;color:#ee2f28;">&nbsp;{{message}}</h5>
+  <h5 *ngIf="message1" align="center" style=" font: 25px Montserrat, sans-serif;color:#1064c4;">&nbsp;{{message1}}</h5>
+
+ 

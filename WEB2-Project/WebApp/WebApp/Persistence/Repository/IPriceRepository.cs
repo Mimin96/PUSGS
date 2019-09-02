@@ -9,6 +9,5 @@ namespace WebApp.Persistence.Repository
 {
     public interface IPriceRepository : IRepository<Price, int>
     {
-
     }
 }

@@ -7,10 +7,11 @@ using WebApp.Models;
 
 namespace WebApp.Persistence.Repository
 {
-    public class PricelistRepository : Repository<Pricelist, int>, IPricelistRepository
+    public class PriceListRepository : Repository<PriceList, int>, IPriceListRepository
     {
-        public PricelistRepository(DbContext context) : base(context)
+        public PriceListRepository(DbContext context) : base(context)
         {
+
         }
     }
 }

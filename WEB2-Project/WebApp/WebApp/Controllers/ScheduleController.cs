@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using WebApp.Lists;
+using WebApp.Dto;
 using WebApp.Models;
 using WebApp.Persistence.UnitOfWork;
 using static WebApp.Models.Enums;
@@ -15,7 +16,7 @@ namespace WebApp.Controllers
     [Authorize]
     [RoutePrefix("api/Schedule")]
     public class ScheduleController : ApiController
-    {
+    {       
         private IUnitOfWork db;
         public ScheduleController(IUnitOfWork db)
         {
@@ -25,10 +26,10 @@ namespace WebApp.Controllers
         [Authorize(Roles = "Admin")]
         [Route("PostLineSchedule")]
         // POST: api/Schedules
-        [ResponseType(typeof(Schedule))]
+        [ResponseType(typeof(Schadule))]
         public IHttpActionResult PostLineSchedule([FromBody]ScheduleLine sl)
         {
-            //ne radi dobro izmeniti
+            
 
             if (!ModelState.IsValid)
             {
@@ -50,7 +51,7 @@ namespace WebApp.Controllers
                 dd = Enums.DayType.Weekend;
             }
 
-            Schedule d = new Schedule { Day = dd, DepartureTime = sl.Time.ToString() };
+            Schadule d = new Schadule { Day = dd, DepartureTime = sl.Time.ToString() };
             if (d.Lines == null)
             {
                 d.Lines = new List<Line>();
@@ -61,23 +62,23 @@ namespace WebApp.Controllers
                 line.Stations = new List<Station>();
             }
 
-            Schedule exist = db.Schedules.GetAll().FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString() && u.Day == dd));
+            Schadule exist = db.Schadules.GetAll().FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString() && u.Day == dd));
             if (exist == null)
             {
 
                 d.Lines.Add(line);
                 d.Line = line;
-                db.Schedules.Add(d);
-                line.Schedules.Add(d);
+                db.Schadules.Add(d);
+                line.Schadules.Add(d);
                 db.Lines.Update(line);
             }
             else
             {
-                if (line.Schedules.FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString() && u.Day == dd)) == null)
+                if (line.Schadules.FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString() && u.Day == dd)) == null)
                 {
                     exist.Lines.Add(line);
-                    db.Schedules.Update(exist);
-                    line.Schedules.Add(exist);
+                    db.Schadules.Update(exist);
+                    line.Schadules.Add(exist);
                     db.Lines.Update(line);
                 }
             }
@@ -90,7 +91,7 @@ namespace WebApp.Controllers
         [Authorize(Roles = "Admin")]
         [Route("EditLineSchedule")]
         // POST: api/Schedules
-        [ResponseType(typeof(Schedule))]
+        [ResponseType(typeof(Schadule))]
         public IHttpActionResult EditLineSchedule([FromBody]ScheduleLine sl)
         {
             if (!ModelState.IsValid)
@@ -113,7 +114,7 @@ namespace WebApp.Controllers
                 dd = Enums.DayType.Weekend;
             }
 
-            Schedule s = new Schedule { Day = dd, DepartureTime = sl.Time.ToString() };
+            Schadule s = new Schadule {  Day = dd, DepartureTime = sl.Time.ToString() };
             var line = db.Lines.GetAll().FirstOrDefault(u => u.Number == sl.Number);
 
             if (s.Lines == null)
@@ -121,7 +122,7 @@ namespace WebApp.Controllers
                 s.Lines = new List<Line>();
             }
 
-            if (sl.Number != "")
+            if(sl.Number != "")
             {
                 s.Lines.Add(line);
                 s.Line = line;
@@ -129,10 +130,10 @@ namespace WebApp.Controllers
                 s.Type = line.RouteType;
             }
 
-            List<Schedule> Schedules = db.Schedules.GetAll().ToList();
-            Schedule scheduleFromBase = null;
+            List<Schadule> schadules = db.Schadules.GetAll().ToList();
+            Schadule schaduleFromBase = null;
 
-            foreach (var sc in Schedules)
+            foreach (var sc in schadules)
             {
                 if (sc.Lines != null)
                 {
@@ -140,29 +141,28 @@ namespace WebApp.Controllers
                     {
                         if (l.Number == sl.Number)
                         {
-                            scheduleFromBase = sc;
+                            schaduleFromBase = sc;
                         }
                     }
                 }
 
             }
-
             
 
-            if (scheduleFromBase.Lines.Count == 1)
+            if (schaduleFromBase.Lines.Count == 1)
             {
-                Schedule exist = db.Schedules.GetAll().FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString()/*&& u.IdSchadule == sl.IDDay*/));
+                Schadule exist = db.Schadules.GetAll().FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString()/*&& u.IdSchadule == sl.IDDay*/));
                 if (exist == null)
                 {
-                    scheduleFromBase.DepartureTime = sl.Time.ToString();
-                    scheduleFromBase.Day = dd;
-                    db.Schedules.Update(scheduleFromBase);
+                    schaduleFromBase.DepartureTime = sl.Time.ToString();
+                    schaduleFromBase.Day = dd;
+                    db.Schadules.Update(schaduleFromBase);
 
-                    for (int i = 0; i < line.Schedules.Count; i++)
+                    for (int i = 0; i < line.Schadules.Count; i++)
                     {
-                        if (line.Schedules[i].IdSchadule == scheduleFromBase.IdSchadule)
+                        if (line.Schadules[i].IdSchadule == schaduleFromBase.IdSchadule)
                         {
-                            line.Schedules[i] = scheduleFromBase;
+                            line.Schadules[i] = schaduleFromBase;
                         }
                     }
 
@@ -170,36 +170,36 @@ namespace WebApp.Controllers
                 }
                 else
                 {
-                    db.Schedules.Remove(scheduleFromBase);
+                    db.Schadules.Remove(schaduleFromBase);
                     s.Lines.Add(line);
-                    db.Schedules.Update(s);
-                    line.Schedules.Remove(scheduleFromBase);
-                    line.Schedules.Add(s);
+                    db.Schadules.Update(s);
+                    line.Schadules.Remove(schaduleFromBase);
+                    line.Schadules.Add(s);
                     db.Lines.Update(line);
 
                 }
 
             }
-            else if (scheduleFromBase.Lines.Count > 1)
+            else if (schaduleFromBase.Lines.Count > 1)
             {
-                Schedule exist = db.Schedules.GetAll().FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString() && u.Day == dd));
+                Schadule exist = db.Schadules.GetAll().FirstOrDefault(u => (u.DepartureTime == sl.Time.ToString() && u.Day == dd));
                 if (exist == null)
                 {
 
-                    scheduleFromBase.Lines.Remove(line);
-                    line.Schedules.Remove(scheduleFromBase);
+                    schaduleFromBase.Lines.Remove(line);
+                    line.Schadules.Remove(schaduleFromBase);
                     s.Lines.Add(line);
-                    db.Schedules.Add(s);
-                    line.Schedules.Add(s);
+                    db.Schadules.Add(s);
+                    line.Schadules.Add(s);
                     db.Lines.Update(line);
                 }
                 else
                 {
-                    scheduleFromBase.Lines.Remove(line);
-                    line.Schedules.Remove(scheduleFromBase);
+                    schaduleFromBase.Lines.Remove(line);
+                    line.Schadules.Remove(schaduleFromBase);
                     exist.Lines.Add(line);
-                    db.Schedules.Update(exist);
-                    line.Schedules.Add(exist);
+                    db.Schadules.Update(exist);
+                    line.Schadules.Add(exist);
                     db.Lines.Update(line);
                 }
             }
@@ -217,7 +217,7 @@ namespace WebApp.Controllers
         [Authorize(Roles = "Admin")]
         [Route("DeleteLineSchedule/{Number}/{Day}")]
         // DELETE: api/Schedules/5
-        [ResponseType(typeof(Schedule))]
+        [ResponseType(typeof(Schadule))]
         public IHttpActionResult DeleteLineSchedule(string Number, string Day)
         {
             if (Number == null)
@@ -225,48 +225,48 @@ namespace WebApp.Controllers
                 return NotFound();
             }
 
-            List<Schedule> schedules = db.Schedules.GetAll().ToList();
+            List<Schadule> schadules = db.Schadules.GetAll().ToList();
 
             List<Line> lines = db.Lines.GetAll().ToList();
             Line line = null;
-            Schedule schedule = null;
+            Schadule schadule = null;
 
             DayType dd = DayType.Workday;
             if (Day == "Work day")
             {
                 dd = DayType.Workday;
             }
-            else if (Day == "Weekend")
+            else if(Day == "Weekend")
             {
                 dd = DayType.Weekend;
             }
 
-            foreach (var s in schedules)
+            foreach (var s in schadules)
             {
-                if (s.Lines != null)
+                if(s.Lines != null)
                 {
                     foreach (var l in s.Lines)
                     {
                         if (Number == l.Number && s.Day == dd)
                         {
                             line = db.Lines.Get(l.IdLine);
-                            schedule = db.Schedules.Get(s.IdSchadule);
+                            schadule = db.Schadules.Get(s.IdSchadule);
                         }
                     }
                 }
             }
-            if (schedule == null)
+            if (schadule == null)
             {
                 return NotFound();
             }
 
-            line.Schedules.Remove(schedule);
+            line.Schadules.Remove(schadule);
             db.Lines.Update(line);
-            schedule.Lines.Remove(line);
-            db.Schedules.Update(schedule);
+            schadule.Lines.Remove(line);
+            db.Schadules.Update(schadule);
             db.Complete();
 
-            return Ok(schedule);
+            return Ok(schadule);
         }
 
         protected override void Dispose(bool disposing)
@@ -280,7 +280,8 @@ namespace WebApp.Controllers
 
         private bool SchaduleExists(int id)
         {
-            return db.Schedules.GetAll().Count(e => e.IdSchadule == id) > 0;
+            return db.Schadules.GetAll().Count(e => e.IdSchadule == id) > 0;
         }
+        
     }
 }
